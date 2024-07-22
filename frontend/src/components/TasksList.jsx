@@ -18,6 +18,23 @@ export const TaskList = () => {
         console.log(data.tasks)
         setTasks(data.tasks)
     }
+
+    const deleteTask = async (id) => {
+
+        const options = {
+            method: "DELETE",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + sessionStorage.getItem('token')
+            }
+        }
+
+        const response = await fetch(`http://127.0.0.1:5000/delete_task/${id}`, options)
+        const data = await response.json()
+        alert(data.message)
+        location.reload()
+    }
     return (
         <>
             <table>
@@ -36,7 +53,7 @@ export const TaskList = () => {
                                 <td>{task.id}</td>
                                 <td>{task.title}</td>
                                 <td>{task.content}</td>
-                                <td>delete</td>
+                                <td onClick={() => {deleteTask(task.id)}}>delete</td>
                             </tr>
                         )
                     })}

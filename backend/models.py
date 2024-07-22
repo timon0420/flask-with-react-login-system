@@ -40,3 +40,4 @@ class Task(db.Model):
             'title': self.title,
             'content': self.content
         }
+    

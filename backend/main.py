@@ -9,15 +9,25 @@ def index():
     json_users = list(map(lambda x: x.to_json(), users))
     return jsonify({"user": json_users})
 
-@app.route('/registration/<name>/<surname>/<email>/<password>', methods=['POST', 'GET'])
-def registration(name, surname, email, password):
+@app.route('/registration', methods=['POST'])
+def registration():
+    name = request.json.get('name')
+    surname = request.json.get('surname')
+    email = request.json.get('email')
+    password = request.json.get('password')
+    
+    user = User.query.filter_by(name=name, surname=surname, email=email).first()
+    if user and bcrypt.check_password_hash(user.password, password):
+        return jsonify({"message": "This user is already registered"}), 403
+
     new_user = User(name=name, surname=surname, email=email, password=bcrypt.generate_password_hash(password))
     try:
         db.session.add(new_user)
+
         db.session.commit()
-        return redirect('/users')
+        return jsonify({"message": "Everything is correct"})
     except Exception as e:
-        return f'{str(e)}'
+        return jsonify({"message": str(e)})
     
 @app.route('/login', methods=['POST'])
 def login():
@@ -56,6 +66,17 @@ def add_task():
         return jsonify({'message': 'Everything is correct'})
     except Exception as e:
         return jsonify({'message': str(e)})
+    
+@app.route('/delete_task/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_task(id):
+    task = Task.query.get(id)
+    try:
+        db.session.delete(task)
+        db.session.commit()
+        return jsonify({"message": "The task has been deleted"})
+    except Exception as e:
+        return jsonify({"message": str(e)})
     
 
 if __name__ == "__main__":

@@ -1,2 +1,0 @@
-do dokończenia style 
-zrobienie struktury backendu

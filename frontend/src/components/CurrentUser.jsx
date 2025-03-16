@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-
+import { Header } from '../styles/Header.style.jsx'
 export const CurrentUser = () => {
     const [user, setUser] = useState()
 
@@ -23,7 +23,7 @@ export const CurrentUser = () => {
     }
     return (
         <>
-            {user}
+            <Header>Hello {user}</Header>
         </>
     )
 }

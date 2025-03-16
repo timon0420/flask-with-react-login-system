@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Input, InputForm, Button } from '../styles/Input.style.jsx'
+import { Header } from '../styles/Header.style.jsx'
 export const LoginForm = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -31,13 +33,13 @@ export const LoginForm = () => {
         }
     }
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={Login}>
-                <input type="email" placeholder='email' name='email' value={email} onChange={e => setEmail(e.target.value)}/>
-                <input type="password" placeholder='password' name='password' value={password} onChange={e => setPassword(e.target.value)}/>
-                <button type="submit" disabled={!(email && password)}>Login</button>
-            </form>
+        <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '10px'}}>
+            <Header>Login</Header>
+            <InputForm onSubmit={Login}>
+                <Input type="email" placeholder='email' name='email' value={email} onChange={e => setEmail(e.target.value)}/>
+                <Input type="password" placeholder='password' name='password' value={password} onChange={e => setPassword(e.target.value)}/>
+                <Button type="submit" disabled={!(email && password)} >Login</Button>
+            </InputForm>
         </div>
     )
 }

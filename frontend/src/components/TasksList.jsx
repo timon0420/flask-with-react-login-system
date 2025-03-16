@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Table, TableBody, TableRow, TableData } from '../styles/TaskList.style.jsx'
 export const TaskList = () => {
     const [tasks, setTasks] = useState()
 
@@ -37,28 +38,26 @@ export const TaskList = () => {
     }
     return (
         <>
-            <table>
+            <Table>
                 <thead>
-                    <tr>
-                        <th>Id</th>
+                    <TableRow>
                         <th>Title</th>
                         <th>Content</th>
                         <th>Actions</th>
-                    </tr>
+                    </TableRow>
                 </thead>
-                <tbody>
+                <TableBody>
                     {tasks && tasks.map((task) => {
                         return (
-                            <tr key={task.id}>
-                                <td>{task.id}</td>
-                                <td>{task.title}</td>
-                                <td>{task.content}</td>
-                                <td onClick={() => {deleteTask(task.id)}}>delete</td>
-                            </tr>
+                            <TableRow key={task.id}>
+                                <TableData>{task.title}</TableData>
+                                <TableData>{task.content}</TableData>
+                                <TableData onClick={() => {deleteTask(task.id)}}>delete</TableData>
+                            </TableRow>
                         )
                     })}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         </>
     )
 }

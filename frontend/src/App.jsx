@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Router>
-        {!sessionStorage.getItem('token') && <nav>
+        {!sessionStorage.getItem('token') && <nav style={{display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px'}}>
           <Link className='link' to='/'>Login</Link>
           <Link className='link' to='/registration'>Registration</Link>
         </nav>}

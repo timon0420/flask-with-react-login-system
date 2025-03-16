@@ -4,11 +4,11 @@ import { TaskList } from "../components/TasksList"
 import { Link } from 'react-router-dom'
 export const UserPage = () => {
     return (
-        <>
-            <h1>User <CurrentUser /></h1>
+        <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '10px'}}>
+            <CurrentUser />
             <TaskForm />
             <TaskList />
-            <Link type='submit' className="link" to='/' onSubmit={() => {sessionStorage.removeItem('token')}}>Logout</Link>
-        </>
+            <Link type='submit' to='/' onClick={() => {sessionStorage.removeItem('token')}}>Logout</Link>
+        </div>
     )
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react' 
+import { Button, Input, InputForm, TextArea } from '../styles/Input.style.jsx'
 export const TaskForm = () => {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
@@ -27,10 +28,10 @@ export const TaskForm = () => {
         }
     }
     return (
-        <form onSubmit={addTask}>
-            <input type="text" name='title' value={title} onChange={e => setTitle(e.target.value)}/>
-            <textarea name="content" value={content} onChange={e => setContent(e.target.value)}></textarea>
-            <button type='submit'>Add task</button>
-        </form>
+        <InputForm onSubmit={addTask}>
+            <Input placeholder='Title' type="text" name='title' value={title} onChange={e => setTitle(e.target.value)}/>
+            <TextArea placeholder='Content' name="content" value={content} onChange={e => setContent(e.target.value)}></TextArea>
+            <Button type='submit'>Add task</Button>
+        </InputForm>
     )
 }
